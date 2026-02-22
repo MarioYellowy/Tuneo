@@ -1,6 +1,12 @@
 export global MiniPlayerState {
     in property <bool> listening: true;
 
+    in property <int> timeline-total: 60 * 60 * 2;
+    in property <int> timeline-loaded: 20;
+    in property <int> timeline-progress: 10;
+
+    callback seek-timeline(int);
+
     in property <image> cover: @image-url("../assets/mock-song.jpg");
     in property <string> song_name: "Mock Song";
     in property <string> artist_name: "Mock Artist";
