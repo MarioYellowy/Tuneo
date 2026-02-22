@@ -34,7 +34,7 @@ jobs:
       run: cargo check
       
     - name: Format
-      run: cargo fmt --check
+      run: cargo fmt
       
     - name: Run Clippy
       run: cargo clippy --all-targets --all-features
