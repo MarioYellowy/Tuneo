@@ -1,0 +1,47 @@
+import { RightIcon, PlayPauseIcon } from "PlaybackIcons.slint";
+import { MiniPlayerState } from "State.slint";
+
+export component PlaybackControls {
+    HorizontalLayout {
+        spacing: 1rem;
+
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+        VerticalLayout {
+            alignment: center;
+
+            RightIcon {
+                transform-rotation: 180deg;
+
+                clicked => {
+                    MiniPlayerState.prev-song()
+                }
+            }
+        }
+
+        VerticalLayout {
+            alignment: center;
+
+            PlayPauseIcon {
+                paused: MiniPlayerState.paused;
+
+                clicked => {
+                    MiniPlayerState.paused = !MiniPlayerState.paused
+                }
+            }
+        }
+
+        VerticalLayout {
+            alignment: center;
+
+            RightIcon {
+                clicked => {
+                    MiniPlayerState.next-song()
+                }
+            }
+        }
+    }
+}

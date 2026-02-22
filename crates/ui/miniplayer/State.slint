@@ -4,4 +4,9 @@ export global MiniPlayerState {
     in property <image> cover: @image-url("../assets/mock-song.jpg");
     in property <string> song_name: "Mock Song";
     in property <string> artist_name: "Mock Artist";
+
+    in-out property <bool> paused: false;
+
+    callback prev-song();
+    callback next-song();
 }

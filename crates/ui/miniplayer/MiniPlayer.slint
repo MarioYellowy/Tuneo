@@ -1,5 +1,6 @@
 import { SongInfo } from "SongInfo.slint";
 import { MiniPlayerState } from "State.slint";
+import { PlaybackControls } from "PlaybackControls.slint";
 
 export component MiniPlayer {
     height: 70px;
@@ -10,25 +11,44 @@ export component MiniPlayer {
         alignment: center;
 
         HorizontalLayout {
-            SongInfo { }
+            alignment: space-between;
+
+            HorizontalLayout {
+                width: 40%;
+
+                SongInfo { }
+            }
+
+            HorizontalLayout {
+                alignment: center;
+
+                PlaybackControls { }
+            }
+
+            HorizontalLayout {
+                width: 40%;
+            }
         }
     }
 
     states [
-      listening when MiniPlayerState.listening: {
-        y: 0px;
-
-        in {
-          animate y { duration: 200ms; easing: ease-out; }
+        listening when MiniPlayerState.listening: {
+            y: 0px;
+            in {
+                animate y {
+                    duration: 200ms;
+                    easing: ease-out;
+                }
+            }
         }
-      }
-
-      not-listening when !MiniPlayerState.listening: {
-        y: root.height;
-
-        in {
-          animate y { duration: 200ms; easing: ease-in; }
+        not-listening when !MiniPlayerState.listening: {
+            y: root.height;
+            in {
+                animate y {
+                    duration: 200ms;
+                    easing: ease-in;
+                }
+            }
         }
-      }
     ]
 }
