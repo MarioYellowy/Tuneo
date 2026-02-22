@@ -8,11 +8,14 @@ export global MiniPlayerState {
     callback seek-timeline(int);
 
     in property <image> cover: @image-url("../assets/mock-song.jpg");
-    in property <string> song_name: "Mock Song";
-    in property <string> artist_name: "Mock Artist";
+    in property <string> song-name: "Mock Song";
+    in property <string> artist-name: "Mock Artist";
 
     in-out property <bool> paused: false;
 
     callback prev-song();
     callback next-song();
+
+    in-out property <bool> muted: false;
+    in-out property <float> volume: 0.5;
 }
