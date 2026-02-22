@@ -1,0 +1,42 @@
+import { MiniPlayerState } from "State.slint";
+
+export global SongInfoTheme {
+    // TODO: Define base theme 
+    in property <length> cover_radius: 8px;
+    in property <brush> song_color: #FFF;
+    in property <brush> artist_color: #888;
+}
+
+export component SongInfo inherits HorizontalLayout {
+    spacing: 1rem;
+
+    Rectangle {
+        border-radius: SongInfoTheme.cover_radius;
+        clip: true;
+        width: 50px;
+        height: 50px;
+
+        Image {
+            source: MiniPlayerState.cover;
+            image-fit: cover;
+            width: parent.width;
+            height: parent.height;
+        }
+    }
+
+    VerticalLayout {
+        alignment: center;
+        spacing: 4px;
+
+        Text {
+            text: MiniPlayerState.song_name;
+            font-size: 16px;
+            color: SongInfoTheme.song_color;
+        }
+
+        Text {
+            text: MiniPlayerState.artist_name;
+            color: SongInfoTheme.artist_color;
+        }
+    }
+}
