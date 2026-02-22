@@ -1,11 +1,21 @@
 import { SongInfo } from "SongInfo.slint";
 import { MiniPlayerState } from "State.slint";
 import { PlaybackControls } from "PlaybackControls.slint";
+import { MiniplayerTheme } from "Theme.slint";
+import { Timeline } from "Timeline.slint";
 
 export component MiniPlayer {
-    height: 70px;
+    height: 75px;
+
+    Timeline {
+        width: parent.width;
+        height: parent.height;
+    }
 
     VerticalLayout {
+        y: 3px;
+        height: 70px;
+
         padding-left: 10px;
         padding-right: 10px;
         alignment: center;

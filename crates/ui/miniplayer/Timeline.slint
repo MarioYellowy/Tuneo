@@ -1,0 +1,105 @@
+import { MiniPlayerState } from "State.slint";
+import { MiniplayerTheme } from "Theme.slint";
+
+export component Timeline {
+    ta := TouchArea {
+        y: -5px;
+        height: 10px;
+
+        mouse-cursor: pointer;
+
+        property <float> timeline-progress: round(ta.mouse-x / root.width * MiniPlayerState.timeline-total);
+
+        clicked => {
+            MiniPlayerState.timeline-progress = timeline-progress;
+            MiniPlayerState.seek-timeline(timeline-progress)
+        }
+
+        moved => {
+            MiniPlayerState.timeline-progress = timeline-progress;
+        }
+
+        Rectangle {
+            x: 0px;
+            y: 5px;
+
+            width: root.width;
+            height: 5px;
+
+            background: MiniplayerTheme.timeline-bg;
+
+            Rectangle {
+                x: 0px;
+                width: root.width * (MiniPlayerState.timeline-loaded / MiniPlayerState.timeline-total);
+
+                background: MiniplayerTheme.timeline-loaded;
+            }
+
+            Rectangle {
+                x: 0px;
+                width: root.width * (MiniPlayerState.timeline-progress / MiniPlayerState.timeline-total);
+
+                animate width { duration: 75ms; }
+
+                background: MiniplayerTheme.timeline-progress;
+
+                Rectangle {
+                    x: parent.width - self.width / 2;
+                    width: 12px;
+                    height: 12px;
+
+                    border-radius: 50px;
+
+                    background: MiniplayerTheme.timeline-thumb;
+                }
+            }
+        }
+
+        Rectangle {
+            x: clamp(ta.mouse-x - self.width / 2, 10px, root.width - self.width - 10px);
+            y: (ta.has-hover ? -7px : 14px) - self.height;
+            width: child.width + 4px;
+            height: child.height + 4px;
+            clip: true;
+
+            transform-scale: ta.has-hover ? 1 : 0;
+
+            animate transform-scale, y { duration: 200ms; }
+            animate width {
+                duration: 100ms;
+                easing: ease-out;
+            }
+
+            border-radius: 4px;
+
+            background: MiniplayerTheme.timeline-tooltip;
+
+            pure function left-pad(n: int) -> string {
+                if n >= 10 {
+                    "\{n}"
+                } else {
+                    "0\{n}"
+                }
+            }
+
+            pure function timeline-text(progress: float) -> string {
+                let hours = floor(progress / (60 * 60));
+                let minutes = mod(floor(progress / 60), 60);
+                let seconds = ceil(mod(progress, 60));
+
+                if hours > 0 {
+                    "\{left-pad(hours)}:\{left-pad(minutes)}:\{left-pad(seconds)}"
+                } else {
+
+                    "\{left-pad(minutes)}:\{left-pad(seconds)}"
+                }
+            }
+
+            child := Text {
+                text: timeline-text(timeline-progress);
+                font-size: 14px;
+                color: MiniplayerTheme.timeline-tooltip-text;
+            }
+        }
+    }
+}
