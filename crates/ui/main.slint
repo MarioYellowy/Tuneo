@@ -1,2 +1,17 @@
+import { MiniPlayer } from "miniplayer/MiniPlayer.slint";
+import { StandardButton } from "std-widgets.slint";
+import { MiniPlayerState } from "miniplayer/State.slint";
 
-export component MainWindow inherits Window {}
+export component MainWindow inherits Window {
+    background: #1E1E1E;
+
+    MiniPlayer {
+        width: parent.width;
+    }
+
+    StandardButton {
+        clicked => {
+            MiniPlayerState.listening = !MiniPlayerState.listening
+        }
+    }
+}

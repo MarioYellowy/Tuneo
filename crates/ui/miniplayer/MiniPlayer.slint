@@ -1,0 +1,34 @@
+import { SongInfo } from "SongInfo.slint";
+import { MiniPlayerState } from "State.slint";
+
+export component MiniPlayer {
+    height: 70px;
+
+    VerticalLayout {
+        padding-left: 10px;
+        padding-right: 10px;
+        alignment: center;
+
+        HorizontalLayout {
+            SongInfo { }
+        }
+    }
+
+    states [
+      listening when MiniPlayerState.listening: {
+        y: 0px;
+
+        in {
+          animate y { duration: 200ms; easing: ease-out; }
+        }
+      }
+
+      not-listening when !MiniPlayerState.listening: {
+        y: root.height;
+
+        in {
+          animate y { duration: 200ms; easing: ease-in; }
+        }
+      }
+    ]
+}
