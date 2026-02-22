@@ -1,0 +1,10 @@
+[workspace]
+members = ["crates/*"]
+
+[package]
+name = "tuneo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tuneo-ui.path = "./crates/ui"
