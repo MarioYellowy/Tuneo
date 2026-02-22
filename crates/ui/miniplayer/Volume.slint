@@ -180,6 +180,7 @@ component VolumeSlider inherits TouchArea {
         width: parent.width;
         height: 3px;
         background: MiniplayerTheme.volume-track;
+        border-radius: 3px;
     }
 
     Rectangle {
@@ -187,6 +188,7 @@ component VolumeSlider inherits TouchArea {
         width: MiniPlayerState.muted ? 0 : parent.width * MiniPlayerState.volume;
         height: 3px;
         background: MiniplayerTheme.volume-progress;
+        border-radius: 3px;
     }
 
     Rectangle {
@@ -199,9 +201,11 @@ component VolumeSlider inherits TouchArea {
 }
 
 export component Volume {
-    width: 40px;
+    width: 50px;
 
-    TouchArea {
+    ta := TouchArea {
+        x: 0px;
+        width: parent.width;
         mouse-cursor: pointer;
 
         clicked => {
@@ -211,12 +215,22 @@ export component Volume {
         VolumeIcon {
             is-muted: MiniPlayerState.muted;
 
+            x: 10px;
             width: 28px;
             height: 28px;
         }
     }
 
-    VolumeSlider {
-        x: -self.width - 10px;
+    VerticalLayout {
+        alignment: center;
+
+        VolumeSlider {
+            x: -self.width;
+
+            width: 90px * (self.has-hover || ta.has-hover ? 1 : 0);
+            opacity: self.has-hover || ta.has-hover ? 1 : 0;
+
+            animate width, opacity { duration: 200ms; }
+        }
     }
 }
