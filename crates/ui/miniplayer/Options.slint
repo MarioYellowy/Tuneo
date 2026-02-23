@@ -1,0 +1,106 @@
+component OptionsIcon {
+    property <length> radius: 7px;
+
+    Rectangle {
+        y: 0px;
+
+        width: radius;
+        height: radius;
+        border-radius: 50px;
+
+        background: #FFF;
+    }
+
+    Rectangle {
+        y: (root.height - self.height) / 2;
+
+        width: radius;
+        height: radius;
+        border-radius: 50px;
+
+        background: #FFF;
+    }
+
+    Rectangle {
+        y: root.height - self.height;
+
+        width: radius;
+        height: radius;
+        border-radius: 50px;
+
+        background: #FFF;
+    }
+}
+
+component OptionItem inherits TouchArea {
+    width: 150px;
+    height: 30px;
+
+    Rectangle { }
+
+    Text {
+        text: "Hola";
+    }
+}
+
+component OptionsMenu inherits Rectangle {
+    width: 150px;
+    clip: true;
+
+    background: #191919;
+    border-color: self.background.brighter(90%);
+    border-width: 2px;
+    border-radius: 8px;
+
+    child := VerticalLayout {
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        @children
+    }
+}
+
+export component Options {
+    width: 28px;
+    height: 28px;
+
+    TouchArea {
+        mouse-cursor: pointer;
+
+        clicked => {
+            menu.opened = !menu.opened;
+        }
+
+        OptionsIcon {
+            width: parent.width;
+            height: parent.width;
+        }
+    }
+
+    menu := TouchArea {
+        in-out property <bool> opened: false;
+
+        x: self.opened ? root.width - options.width / 2 - 10px : root.width + options.width / 2 + 10px;
+        y: -self.height - 40px;
+        height: 5 * 30px + 10px;
+
+        animate x {
+            duration: 300ms;
+            easing: ease-out-back;
+        }
+
+        options := OptionsMenu {
+            height: parent.height;
+
+            OptionItem { }
+
+            OptionItem { }
+
+            OptionItem { }
+
+            OptionItem { }
+
+            OptionItem { }
+        }
+    }
+}

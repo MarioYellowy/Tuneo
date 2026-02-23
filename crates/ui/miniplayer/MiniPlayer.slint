@@ -4,6 +4,7 @@ import { PlaybackControls } from "PlaybackControls.slint";
 import { MiniplayerTheme } from "Theme.slint";
 import { Timeline } from "Timeline.slint";
 import { Volume } from "Volume.slint";
+import { Options } from "Options.slint";
 
 export component MiniPlayer {
     height: 75px;
@@ -36,12 +37,18 @@ export component MiniPlayer {
                 PlaybackControls { }
             }
 
-            HorizontalLayout {
+            VerticalLayout {
                 width: 40%;
-                alignment: end;
-                padding-right: 10px;
+                alignment: center;
 
-                Volume { }
+                HorizontalLayout {
+                    alignment: end;
+                    padding-right: 10px;
+
+                    Volume { }
+
+                    Options { }
+                }
             }
         }
     }
