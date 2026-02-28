@@ -1,3 +1,9 @@
+export enum SongLikedState {
+  None,
+  Liked,
+  Disliked,
+}
+
 export global MiniPlayerState {
     in property <bool> listening: true;
 
@@ -10,6 +16,8 @@ export global MiniPlayerState {
     in property <image> cover: @image-url("../assets/mock-song.jpg");
     in property <string> song-name: "Mock Song";
     in property <string> artist-name: "Mock Artist";
+
+    in property <SongLikedState> song-liked: SongLikedState.None;
 
     in-out property <bool> paused: false;
 

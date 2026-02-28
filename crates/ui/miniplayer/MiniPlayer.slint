@@ -1,10 +1,69 @@
 import { SongInfo } from "SongInfo.slint";
-import { MiniPlayerState } from "State.slint";
+import { MiniPlayerState, SongLikedState } from "State.slint";
 import { PlaybackControls } from "PlaybackControls.slint";
 import { MiniplayerTheme } from "Theme.slint";
 import { Timeline } from "Timeline.slint";
 import { Volume } from "Volume.slint";
 import { Options } from "Options.slint";
+import { LikeIcon, DislikeIcon } from "LikeIcon.slint";
+
+
+component MiniPlayerLeft inherits HorizontalLayout {
+    width: 40%;
+    spacing: 1rem;
+
+    SongInfo { }
+
+    VerticalLayout {
+        width: 100%;
+        alignment: center;
+
+        HorizontalLayout {
+            spacing: 1rem;
+            LikeIcon {
+                is-filled: MiniPlayerState.song-liked == SongLikedState.Liked;
+                clicked => {
+                    if self.is-filled {
+                        MiniPlayerState.song-liked = SongLikedState.None;
+                    } else {
+                        MiniPlayerState.song-liked = SongLikedState.Liked;
+                    }
+                }
+            }
+
+            DislikeIcon {
+                is-filled: MiniPlayerState.song-liked == SongLikedState.Disliked;
+                clicked => {
+                    if self.is-filled {
+                        MiniPlayerState.song-liked = SongLikedState.None;
+                    } else {
+                        MiniPlayerState.song-liked = SongLikedState.Disliked;
+                    }
+                }
+            }
+        }
+    }
+}
+
+component MiniPlayerCenter inherits HorizontalLayout {
+    alignment: center;
+
+    PlaybackControls { }
+}
+
+component MiniPlayerRight inherits VerticalLayout {
+    width: 40%;
+    alignment: center;
+
+    HorizontalLayout {
+        alignment: end;
+        padding-right: 10px;
+
+        Volume { }
+
+        Options { }
+    }
+}
 
 export component MiniPlayer {
     height: 75px;
@@ -25,31 +84,11 @@ export component MiniPlayer {
         HorizontalLayout {
             alignment: space-between;
 
-            HorizontalLayout {
-                width: 40%;
+            MiniPlayerLeft { }
 
-                SongInfo { }
-            }
+            MiniPlayerCenter { }
 
-            HorizontalLayout {
-                alignment: center;
-
-                PlaybackControls { }
-            }
-
-            VerticalLayout {
-                width: 40%;
-                alignment: center;
-
-                HorizontalLayout {
-                    alignment: end;
-                    padding-right: 10px;
-
-                    Volume { }
-
-                    Options { }
-                }
-            }
+            MiniPlayerRight { }
         }
     }
 
@@ -73,4 +112,20 @@ export component MiniPlayer {
             }
         }
     ]
+}
+
+component MiniPlayerPreview {
+    min-height: 80px;
+    Rectangle {
+        y: (parent.height - player.height * 3);
+        width: parent.width;
+
+        height: parent.height;
+        background: #000;
+    }
+
+    player := MiniPlayer {
+        y: (parent.height - self.height * 4);
+        width: parent.width;
+    }
 }
