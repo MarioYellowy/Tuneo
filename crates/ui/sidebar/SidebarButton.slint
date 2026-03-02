@@ -1,0 +1,74 @@
+import { SidebarTheme } from "Theme.slint";
+import { SidebarState } from "State.slint";
+
+export component SidebarIcon {
+    width: 22px;
+    height: 22px;
+
+    in property <bool> is-selected: false;
+    in property <string> commands-default;
+    in property <string> commands-selected;
+
+    Path {
+        viewbox-width: 22;
+        viewbox-height: 22;
+
+        fill: is-selected ? SidebarTheme.iconColorSelected : SidebarTheme.iconColorDefault;
+
+        stroke: transparent;
+        stroke-width: 0px;
+
+        animate fill, stroke { duration: 100ms; }
+
+        commands: is-selected ? commands-selected : commands-default;
+    }
+}
+
+export component SidebarButton {
+    in property <string> label;
+    in-out property <bool> active: false;
+    
+
+    callback clicked();
+
+    width: 180px;
+    height: 40px;
+
+    ta := TouchArea {
+        width: parent.width;
+        height: parent.height;
+        mouse-cursor: MouseCursor.pointer;
+
+        clicked => {
+            root.clicked();
+        }
+    }
+
+    container := Rectangle {
+        width: parent.width;
+        height: parent.height;
+        border-radius: 5px;
+
+        background: active ? SidebarTheme.backgroundButtonSelected : ta.has-hover ? SidebarTheme.backgroundButtonHover : transparent;
+
+        animate background { duration: 200ms; }
+
+        VerticalLayout {
+            alignment: center;
+
+            HorizontalLayout {
+                alignment: start;
+                spacing: 15px;
+                padding-left: 20px;
+                padding-right: 20px;
+                @children
+
+                Text {
+                    text: label;
+                    font-size: 16px;
+                    vertical-alignment: center;
+                }
+            }
+        }
+    }
+}

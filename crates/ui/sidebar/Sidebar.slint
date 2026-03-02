@@ -1,0 +1,228 @@
+import { ScrollView } from "std-widgets.slint";
+import { SidebarTheme } from "Theme.slint";
+import { SidebarButton, SidebarIcon } from "SidebarButton.slint";
+import "../assets/fonts/Rubik/Rubik-Regular.ttf";
+
+export component Sidebar {
+    width: 220px;
+
+    property <int> selected-index: 0;
+
+    Rectangle {
+        width: parent.width;
+        height: parent.height;
+        background: SidebarTheme.backgroundContainer;
+
+        HorizontalLayout {
+            alignment: center;
+
+            VerticalLayout {
+                alignment: start;
+                spacing: 10px;
+
+                Image {
+                    source: @image-url("../assets/Logo.png");
+                }
+
+                Rectangle {
+                    width: 180px;
+                    height: 40px;
+                    HorizontalLayout {
+                        alignment: start;
+                        padding-left: 20px;
+
+                        Text {
+                            text: "Menu";
+                            font-size: 16px;
+                            font-family: SidebarTheme.sidebarTypoTitle;
+                            color: SidebarTheme.sidebarSectionTitle;
+                            vertical-alignment: center;
+                        }
+                    }
+                }
+
+                SidebarButton {
+                    SidebarIcon {
+                        commands-default: SidebarTheme.homeIconDefault;
+                        commands-selected: SidebarTheme.homeIconSelected;
+                    }
+
+                    label: "Home";
+                }
+
+                SidebarButton {
+                    SidebarIcon {
+                        commands-default: SidebarTheme.genresIconDefault;
+                        commands-selected: SidebarTheme.genresIconSelected;
+                    }
+
+                    label: "Genres";
+                }
+
+                SidebarButton {
+                    SidebarIcon {
+                        commands-default: SidebarTheme.stationsIconDefault;
+                        commands-selected: SidebarTheme.stationsIconSelected;
+                    }
+
+                    label: "Stations";
+                }
+
+                Rectangle {
+                    width: 180px;
+                    height: 40px;
+                    HorizontalLayout {
+                        alignment: start;
+                        padding-left: 20px;
+
+                        Text {
+                            text: "Library";
+                            font-size: 16px;
+                            font-family: SidebarTheme.sidebarTypoTitle;
+                            color: SidebarTheme.sidebarSectionTitle;
+                            vertical-alignment: center;
+                        }
+                    }
+                }
+
+                SidebarButton {
+                    SidebarIcon {
+                        commands-default: SidebarTheme.recentIconDefault;
+                        commands-selected: SidebarTheme.recentIconSelected;
+                    }
+
+                    label: "Recent";
+                }
+
+                SidebarButton {
+                    SidebarIcon {
+                        commands-default: SidebarTheme.artistIconDefault;
+                        commands-selected: SidebarTheme.artistIconSelected;
+                    }
+
+                    label: "Artist";
+                }
+
+                SidebarButton {
+                    SidebarIcon {
+                        commands-default: SidebarTheme.albumIconDefault;
+                        commands-selected: SidebarTheme.albumIconSelected;
+                    }
+
+                    label: "Albums";
+                }
+
+                SidebarButton {
+                    SidebarIcon {
+                        commands-default: SidebarTheme.favoritiesIconDefault;
+                        commands-selected: SidebarTheme.favoritiesIconSelected;
+                    }
+
+                    label: "Favorities";
+                }
+
+                SidebarButton {
+                    SidebarIcon {
+                        commands-default: SidebarTheme.localIconDefault;
+                        commands-selected: SidebarTheme.localIconSelected;
+                    }
+
+                    label: "local";
+                }
+
+                Rectangle {
+                    width: 180px;
+                    height: 40px;
+                    HorizontalLayout {
+                        alignment: start;
+                        padding-left: 20px;
+
+                        Text {
+                            text: "Playlist";
+                            font-size: 16px;
+                            font-family: SidebarTheme.sidebarTypoTitle;
+                            color: SidebarTheme.sidebarSectionTitle;
+                            vertical-alignment: center;
+                        }
+                    }
+                }
+
+                SidebarButton {
+                    SidebarIcon {
+                        commands-default: SidebarTheme.createIconDefault;
+                        commands-selected: SidebarTheme.createIconSelected;
+                    }
+
+                    label: "Create new";
+                }
+
+                ScrollView {
+                    height: 120px;
+                    viewport-height: 180px;
+                    viewport-y: -40px;
+                   
+                    animate viewport-y {
+                        duration: 1000ms;
+                    }
+                    Rectangle {
+                        
+                        width: parent.width;
+                        height: parent.height;
+                        background: blueviolet;
+                        HorizontalLayout {
+                            alignment: center;
+
+                            VerticalLayout {
+                                alignment: start;
+                                SidebarButton {
+                                    SidebarIcon {
+                                        commands-default: SidebarTheme.playlistIconDefault;
+                                        commands-selected: SidebarTheme.playlistIconSelected;
+                                    }
+
+                                    label: "";
+                                }
+
+                                SidebarButton {
+                                    SidebarIcon {
+                                        commands-default: SidebarTheme.playlistIconDefault;
+                                        commands-selected: SidebarTheme.playlistIconSelected;
+                                    }
+
+                                    label: "";
+                                }
+
+                                SidebarButton {
+                                    SidebarIcon {
+                                        commands-default: SidebarTheme.playlistIconDefault;
+                                        commands-selected: SidebarTheme.playlistIconSelected;
+                                    }
+
+                                    label: "";
+                                }
+
+                                SidebarButton {
+                                    SidebarIcon {
+                                        commands-default: SidebarTheme.playlistIconDefault;
+                                        commands-selected: SidebarTheme.playlistIconSelected;
+                                    }
+
+                                    label: "";
+                                }
+
+                                SidebarButton {
+                                    SidebarIcon {
+                                        commands-default: SidebarTheme.playlistIconDefault;
+                                        commands-selected: SidebarTheme.playlistIconSelected;
+                                    }
+
+                                    label: "";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
