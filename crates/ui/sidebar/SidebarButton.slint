@@ -27,6 +27,8 @@ export component SidebarIcon {
 export component SidebarButton {
     in property <string> label;
     in-out property <bool> active: false;
+    in property <string> icon-commands-default;
+    in property <string> icon-commands-selected;
     
 
     callback clicked();
@@ -41,6 +43,7 @@ export component SidebarButton {
 
         clicked => {
             root.clicked();
+            active = !active;
         }
     }
 
@@ -61,7 +64,12 @@ export component SidebarButton {
                 spacing: 15px;
                 padding-left: 20px;
                 padding-right: 20px;
-                @children
+                
+                SidebarIcon {
+                    is-selected: root.active;
+                    commands-default: root.icon-commands-default;
+                    commands-selected: root.icon-commands-selected;
+                }
 
                 Text {
                     text: label;
