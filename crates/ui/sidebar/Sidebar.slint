@@ -24,7 +24,7 @@ export component Sidebar {
                     source: @image-url("../assets/Logo.png");
                 }
 
-                Rectangle {
+                menu-section := Rectangle {
                     width: 180px;
                     height: 40px;
                     HorizontalLayout {
@@ -42,33 +42,24 @@ export component Sidebar {
                 }
 
                 SidebarButton {
-                    SidebarIcon {
-                        commands-default: SidebarTheme.homeIconDefault;
-                        commands-selected: SidebarTheme.homeIconSelected;
-                    }
-
                     label: "Home";
+                    icon-commands-default: SidebarTheme.homeIconDefault;
+                    icon-commands-selected: SidebarTheme.homeIconSelected;
                 }
 
                 SidebarButton {
-                    SidebarIcon {
-                        commands-default: SidebarTheme.genresIconDefault;
-                        commands-selected: SidebarTheme.genresIconSelected;
-                    }
-
                     label: "Genres";
+                    icon-commands-default: SidebarTheme.genresIconDefault;
+                    icon-commands-selected: SidebarTheme.genresIconSelected;
                 }
 
                 SidebarButton {
-                    SidebarIcon {
-                        commands-default: SidebarTheme.stationsIconDefault;
-                        commands-selected: SidebarTheme.stationsIconSelected;
-                    }
-
                     label: "Stations";
+                    icon-commands-default: SidebarTheme.stationsIconDefault;
+                    icon-commands-selected: SidebarTheme.stationsIconSelected;
                 }
 
-                Rectangle {
+                library-section := Rectangle {
                     width: 180px;
                     height: 40px;
                     HorizontalLayout {
@@ -86,51 +77,36 @@ export component Sidebar {
                 }
 
                 SidebarButton {
-                    SidebarIcon {
-                        commands-default: SidebarTheme.recentIconDefault;
-                        commands-selected: SidebarTheme.recentIconSelected;
-                    }
-
                     label: "Recent";
+                    icon-commands-default: SidebarTheme.recentIconDefault;
+                    icon-commands-selected: SidebarTheme.recentIconSelected;
                 }
 
                 SidebarButton {
-                    SidebarIcon {
-                        commands-default: SidebarTheme.artistIconDefault;
-                        commands-selected: SidebarTheme.artistIconSelected;
-                    }
-
                     label: "Artist";
+                    icon-commands-default: SidebarTheme.artistIconDefault;
+                    icon-commands-selected: SidebarTheme.artistIconSelected;
                 }
 
                 SidebarButton {
-                    SidebarIcon {
-                        commands-default: SidebarTheme.albumIconDefault;
-                        commands-selected: SidebarTheme.albumIconSelected;
-                    }
-
                     label: "Albums";
+                    icon-commands-default: SidebarTheme.albumIconDefault;
+                    icon-commands-selected: SidebarTheme.albumIconSelected;
                 }
 
                 SidebarButton {
-                    SidebarIcon {
-                        commands-default: SidebarTheme.favoritiesIconDefault;
-                        commands-selected: SidebarTheme.favoritiesIconSelected;
-                    }
-
                     label: "Favorities";
+                    icon-commands-default: SidebarTheme.favoritiesIconDefault;
+                    icon-commands-selected: SidebarTheme.favoritiesIconSelected;
                 }
 
                 SidebarButton {
-                    SidebarIcon {
-                        commands-default: SidebarTheme.localIconDefault;
-                        commands-selected: SidebarTheme.localIconSelected;
-                    }
-
                     label: "local";
+                    icon-commands-default: SidebarTheme.localIconDefault;
+                    icon-commands-selected: SidebarTheme.localIconSelected;
                 }
 
-                Rectangle {
+                playlist-section := Rectangle {
                     width: 180px;
                     height: 40px;
                     HorizontalLayout {
@@ -148,12 +124,9 @@ export component Sidebar {
                 }
 
                 SidebarButton {
-                    SidebarIcon {
-                        commands-default: SidebarTheme.createIconDefault;
-                        commands-selected: SidebarTheme.createIconSelected;
-                    }
-
                     label: "Create new";
+                    icon-commands-default: SidebarTheme.createIconDefault;
+                    icon-commands-selected: SidebarTheme.createIconSelected;
                 }
 
                 ScrollView {
@@ -175,48 +148,25 @@ export component Sidebar {
                             VerticalLayout {
                                 alignment: start;
                                 SidebarButton {
-                                    SidebarIcon {
-                                        commands-default: SidebarTheme.playlistIconDefault;
-                                        commands-selected: SidebarTheme.playlistIconSelected;
-                                    }
-
                                     label: "";
+                                    icon-commands-default: SidebarTheme.playlistIconDefault;
+                                    icon-commands-selected: SidebarTheme.playlistIconSelected;
                                 }
 
                                 SidebarButton {
-                                    SidebarIcon {
-                                        commands-default: SidebarTheme.playlistIconDefault;
-                                        commands-selected: SidebarTheme.playlistIconSelected;
-                                    }
-
                                     label: "";
+                                    icon-commands-default: SidebarTheme.playlistIconDefault;
+                                    icon-commands-selected: SidebarTheme.playlistIconSelected;
                                 }
-
                                 SidebarButton {
-                                    SidebarIcon {
-                                        commands-default: SidebarTheme.playlistIconDefault;
-                                        commands-selected: SidebarTheme.playlistIconSelected;
-                                    }
-
                                     label: "";
+                                    icon-commands-default: SidebarTheme.playlistIconDefault;
+                                    icon-commands-selected: SidebarTheme.playlistIconSelected;
                                 }
-
                                 SidebarButton {
-                                    SidebarIcon {
-                                        commands-default: SidebarTheme.playlistIconDefault;
-                                        commands-selected: SidebarTheme.playlistIconSelected;
-                                    }
-
                                     label: "";
-                                }
-
-                                SidebarButton {
-                                    SidebarIcon {
-                                        commands-default: SidebarTheme.playlistIconDefault;
-                                        commands-selected: SidebarTheme.playlistIconSelected;
-                                    }
-
-                                    label: "";
+                                    icon-commands-default: SidebarTheme.playlistIconDefault;
+                                    icon-commands-selected: SidebarTheme.playlistIconSelected;
                                 }
                             }
                         }
