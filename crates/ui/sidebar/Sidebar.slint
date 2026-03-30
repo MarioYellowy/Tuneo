@@ -43,18 +43,25 @@ export component Sidebar {
 
                 SidebarButton {
                     label: "Home";
+                    index: 0;
+                    selected-index <=> root.selected-index;
                     icon-commands-default: SidebarTheme.homeIconDefault;
                     icon-commands-selected: SidebarTheme.homeIconSelected;
+                    
                 }
 
                 SidebarButton {
                     label: "Genres";
+                    index: 1;
+                    selected-index <=> root.selected-index;
                     icon-commands-default: SidebarTheme.genresIconDefault;
                     icon-commands-selected: SidebarTheme.genresIconSelected;
                 }
 
                 SidebarButton {
                     label: "Stations";
+                    index: 2;
+                    selected-index <=> root.selected-index;
                     icon-commands-default: SidebarTheme.stationsIconDefault;
                     icon-commands-selected: SidebarTheme.stationsIconSelected;
                 }
@@ -78,30 +85,40 @@ export component Sidebar {
 
                 SidebarButton {
                     label: "Recent";
+                    index: 3;
+                    selected-index <=> root.selected-index;
                     icon-commands-default: SidebarTheme.recentIconDefault;
                     icon-commands-selected: SidebarTheme.recentIconSelected;
                 }
 
                 SidebarButton {
                     label: "Artist";
+                    index: 4;
+                    selected-index <=> root.selected-index;
                     icon-commands-default: SidebarTheme.artistIconDefault;
                     icon-commands-selected: SidebarTheme.artistIconSelected;
                 }
 
                 SidebarButton {
                     label: "Albums";
+                    index: 5;
+                    selected-index <=> root.selected-index;
                     icon-commands-default: SidebarTheme.albumIconDefault;
                     icon-commands-selected: SidebarTheme.albumIconSelected;
                 }
 
                 SidebarButton {
                     label: "Favorities";
+                    index: 6;
+                    selected-index <=> root.selected-index;
                     icon-commands-default: SidebarTheme.favoritiesIconDefault;
                     icon-commands-selected: SidebarTheme.favoritiesIconSelected;
                 }
 
                 SidebarButton {
                     label: "local";
+                    index: 7;
+                    selected-index <=> root.selected-index;
                     icon-commands-default: SidebarTheme.localIconDefault;
                     icon-commands-selected: SidebarTheme.localIconSelected;
                 }
@@ -125,6 +142,8 @@ export component Sidebar {
 
                 SidebarButton {
                     label: "Create new";
+                    index: 8;
+                    selected-index <=> root.selected-index;
                     icon-commands-default: SidebarTheme.createIconDefault;
                     icon-commands-selected: SidebarTheme.createIconSelected;
                 }

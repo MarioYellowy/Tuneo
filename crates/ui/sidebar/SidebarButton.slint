@@ -13,23 +13,58 @@ export component SidebarIcon {
         viewbox-width: 22;
         viewbox-height: 22;
 
-        fill: is-selected ? SidebarTheme.iconColorSelected : SidebarTheme.iconColorDefault;
-
+        fill: SidebarTheme.iconColorDefault;
         stroke: transparent;
         stroke-width: 0px;
 
-        animate fill, stroke { duration: 100ms; }
+        commands: commands-default;
+        opacity: is-selected ? 0.0 : 1.0;
 
-        commands: is-selected ? commands-selected : commands-default;
+        animate opacity {
+            duration: 200ms;
+            easing: ease-in-out;
+        }
+
+        states [
+            selected when is-selected: {
+                fill: SidebarTheme.iconColorSelected;
+                commands: commands-selected;
+                in {
+                    animate fill {
+                        duration: 300ms;
+                        easing: ease-in-out;
+                    }
+                }
+                out {
+                    animate fill {
+                        duration: 300ms;
+                        easing: ease-in-out;
+                    }
+                }
+            }
+        ]
+    }
+
+    Path {
+        viewbox-width: 22;
+        viewbox-height: 22;
+        fill: SidebarTheme.iconColorSelected;
+        commands: commands-selected;
+        opacity: is-selected ? 1.0 : 0.0;
+        animate opacity {
+            duration: 300ms;
+            easing: ease-in-out;
+        }
     }
 }
 
 export component SidebarButton {
     in property <string> label;
-    in-out property <bool> active: false;
+    in property <int> index;
+    in-out property <int> selected-index;
+    private property <bool> active: selected-index == index;
     in property <string> icon-commands-default;
     in property <string> icon-commands-selected;
-    
 
     callback clicked();
 
@@ -43,7 +78,7 @@ export component SidebarButton {
 
         clicked => {
             root.clicked();
-            active = !active;
+            selected-index = index;
         }
     }
 
@@ -64,7 +99,7 @@ export component SidebarButton {
                 spacing: 15px;
                 padding-left: 20px;
                 padding-right: 20px;
-                
+
                 SidebarIcon {
                     is-selected: root.active;
                     commands-default: root.icon-commands-default;
