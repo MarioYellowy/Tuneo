@@ -65,8 +65,9 @@ component MiniPlayerRight inherits VerticalLayout {
     }
 }
 
-export component MiniPlayer {
+export component MiniPlayer inherits Rectangle {
     height: 75px;
+    background: #18181C;
 
     Timeline {
         width: parent.width;
@@ -112,20 +113,4 @@ export component MiniPlayer {
             }
         }
     ]
-}
-
-component MiniPlayerPreview {
-    min-height: 80px;
-    Rectangle {
-        y: (parent.height - player.height * 3);
-        width: parent.width;
-
-        height: parent.height;
-        background: #000;
-    }
-
-    player := MiniPlayer {
-        y: (parent.height - self.height * 4);
-        width: parent.width;
-    }
 }
