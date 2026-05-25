@@ -9,14 +9,9 @@ path = "./lib.rs"
 [dependencies]
 
 [dependencies.slint]
-version = "1.15"
+version = "1.16.1"
 default-features = false
-features = [
-  "accessibility",
-  "compat-1-2",
-  "backend-winit",
-  "renderer-winit-skia",
-]
+features = ["accessibility", "compat-1-2", "backend-winit", "renderer-winit-skia"]
 
 [build-dependencies]
-slint-build = "1.15"
+slint-build = "1.16.1"
