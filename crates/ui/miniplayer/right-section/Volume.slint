@@ -1,0 +1,237 @@
+import { MiniPlayerState } from "State.slint";
+import { MiniplayerTheme } from "Theme.slint";
+
+global Utils {
+    public pure function lerp-raw(a: float, b: float, p: float) -> float {
+        a + (b - a) * p
+    }
+}
+
+component VolumeIconBase inherits Path {
+    viewbox-width: 24;
+    viewbox-height: 24;
+
+    stroke: #FFF;
+    stroke-width: 3.5px;
+
+    commands: "M13.26 3.3a1.1 1.1 0 0 1 1.73.78l.01.11v15.62a1.1 1.1 0 0 1-1.64.95l-.1-.06L6.68 16H4a2 2 0 0 1-2-1.85V10a2 2 0 0 1 1.85-2h2.83z";
+}
+
+component VolumeIcon1 inherits Path {
+    viewbox-width: 34;
+    viewbox-height: 29.69;
+
+    in property <float> muted;
+
+    function lerp(a: float, b: float) -> float {
+        Utils.lerp-raw(a, b, muted)
+    }
+
+    fill: #FFF;
+
+    MoveTo {
+        x: lerp(27.09, 23.62);
+        y: lerp(6.28, 10.13);
+    }
+
+    ArcTo {
+        radius-x: 1.67;
+        radius-y: 1.67;
+        sweep: true;
+        x: lerp(29.45, 25.82);
+        y: lerp(6.15, 9.99);
+    }
+
+    ArcTo {
+        radius-x: muted >= 0.99 ? 0 : lerp(11.64, lerp(30, 150));
+        radius-y: muted >= 0.99 ? 0 : lerp(11.64, lerp(30, 150));
+        sweep: true;
+        x: lerp(29.45, lerp(37.05, 33.05));
+        y: lerp(23.54, 17.2);
+    }
+
+    ArcTo {
+        radius-x: 1.67;
+        radius-y: 1.67;
+        large-arc: true;
+        sweep: true;
+        x: lerp(27.22, 30.85);
+        y: lerp(21.05, 19.7);
+    }
+
+    ArcTo {
+        radius-x: muted >= 0.95 ? 0 : lerp(8.3, 50);
+        radius-y: muted >= 0.95 ? 0 : lerp(8.3, 50);
+        x: lerp(27.22, 23.62);
+        y: lerp(8.63, 12.49);
+    }
+
+    ArcTo {
+        radius-x: 1.67;
+        radius-y: 1.67;
+        sweep: true;
+        x: lerp(27.09, 23.62);
+        y: lerp(6.28, 10.13);
+    }
+
+    Close { }
+}
+
+component VolumeIcon2 inherits Path {
+    viewbox-width: 33.33;
+    viewbox-height: 29.69;
+
+    in property <float> muted;
+
+    function lerp(a: float, b: float) -> float {
+        Utils.lerp-raw(a, b, muted)
+    }
+
+    fill: #FFF;
+
+    MoveTo {
+        x: lerp(26.11, lerp(37.19, 33.19));
+        y: lerp(9.88, lerp(17.33, 12.33));
+    }
+
+    ArcTo {
+        radius-x: muted >= 0.99 ? 0 : lerp(6.65, lerp(6, 100));
+        radius-y: muted >= 0.99 ? 0 : lerp(6.65, lerp(6, 100));
+        sweep: true;
+        x: lerp(26.11, 25.98);
+        y: lerp(19.81, 19.56);
+    }
+
+    ArcTo {
+        radius-x: 1.67;
+        radius-y: 1.67;
+        sweep: true;
+        x: lerp(23.74, 23.48);
+        y: lerp(17.48, 17.36);
+    }
+
+    ArcTo {
+        radius-x: muted >= 0.99 ? 0 : lerp(3.33, lerp(3, 100));
+        radius-y: muted >= 0.99 ? 0 : lerp(3.33, lerp(6, 100));
+        x: lerp(24.09, 30.69);
+        y: lerp(12.55, 10.13);
+    }
+
+    ArcTo {
+        radius-x: 1.67;
+        radius-y: 1.67;
+        sweep: true;
+        x: lerp(26.11, lerp(37.19, 33.19));
+        y: lerp(9.87, lerp(17.33, 12.33));
+    }
+
+    Close { }
+}
+
+component VolumeIcon {
+    VolumeIconBase {
+        x: 0px;
+        width: parent.height;
+        height: parent.height;
+    }
+
+    in property <bool> is-muted;
+    property <float> muted: is-muted ? 1 : 0;
+
+    VolumeIcon1 {
+        muted: muted;
+
+        animate muted { duration: 200ms; }
+
+        x: parent.height * Utils.lerp-raw(20%, 12.5%, self.muted);
+        width: parent.height * 90%;
+        height: parent.height * 90%;
+    }
+
+    VolumeIcon2 {
+        muted: muted;
+
+        animate muted { duration: 200ms; }
+
+        x: parent.height * 10%;
+        width: parent.height * 90%;
+        height: parent.height * 90%;
+    }
+}
+
+component VolumeSlider inherits TouchArea {
+    width: 90px;
+    height: 25px;
+
+    mouse-cursor: pointer;
+
+    property <float> volume: clamp(root.mouse-x / root.width, 0, 1);
+
+    clicked => {
+        MiniPlayerState.volume = volume;
+        MiniPlayerState.muted = volume == 0;
+    }
+
+    moved => {
+        MiniPlayerState.volume = volume;
+        MiniPlayerState.muted = volume == 0;
+    }
+
+    Rectangle {
+        width: parent.width;
+        height: 3px;
+        background: MiniplayerTheme.volume-track;
+        border-radius: 3px;
+    }
+
+    Rectangle {
+        x: 0px;
+        width: MiniPlayerState.muted ? 0 : parent.width * MiniPlayerState.volume;
+        height: 3px;
+        background: MiniplayerTheme.volume-progress;
+        border-radius: 3px;
+    }
+
+    Rectangle {
+        x: MiniPlayerState.muted ? -self.width / 2 : parent.width * MiniPlayerState.volume - self.width / 2;
+        width: 12px;
+        height: 12px;
+        border-radius: 50px;
+        background: MiniplayerTheme.volume-thumb;
+    }
+}
+
+export component Volume {
+    width: 50px;
+
+    ta := TouchArea {
+        x: 0px;
+        width: parent.width;
+        mouse-cursor: pointer;
+
+        clicked => {
+            MiniPlayerState.muted = !MiniPlayerState.muted;
+        }
+
+        VolumeIcon {
+            is-muted: MiniPlayerState.muted;
+
+            x: 10px;
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    VerticalLayout {
+        alignment: center;
+
+        VolumeSlider {
+            x: -self.width;
+
+            width: 90px * (self.has-hover || ta.has-hover ? 1 : 0);
+            opacity: self.has-hover || ta.has-hover ? 1 : 0;
+
+            animate width, opacity { duration: 200ms; }
+        }
+    }
+}

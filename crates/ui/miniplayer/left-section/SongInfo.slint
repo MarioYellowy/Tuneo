@@ -1,0 +1,36 @@
+import { MiniPlayerState } from "../State.slint";
+import { MiniplayerTheme } from "../Theme.slint";
+
+export component SongInfo inherits HorizontalLayout {
+    spacing: 1rem;
+
+    Rectangle {
+        border-radius: MiniplayerTheme.song-cover-radius;
+        clip: true;
+        width: 50px;
+        height: 50px;
+
+        Image {
+            source: MiniPlayerState.cover;
+            image-fit: cover;
+            width: parent.width;
+            height: parent.height;
+        }
+    }
+
+    VerticalLayout {
+        alignment: center;
+        spacing: 4px;
+
+        Text {
+            text: MiniPlayerState.song-name;
+            font-size: 16px;
+            color: MiniplayerTheme.song-title;
+        }
+
+        Text {
+            text: MiniPlayerState.artist-name;
+            color: MiniplayerTheme.song-artist;
+        }
+    }
+}

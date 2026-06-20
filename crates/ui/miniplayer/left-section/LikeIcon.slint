@@ -1,0 +1,78 @@
+import { MiniplayerTheme } from "Theme.slint";
+component IconBase inherits TouchArea {
+    width: 30px;
+    height: 30px;
+
+    in property <bool> is-selected: false;
+    in property <string> commands-default;
+    in property <string> commands-selected;
+
+    mouse-cursor: pointer;
+
+    Path {
+        viewbox-width: 24;
+        viewbox-height: 24;
+
+        fill: MiniplayerTheme.iconColorDefault;
+        stroke: transparent;
+        stroke-width: 0px;
+
+        commands: commands-default;
+        opacity: is-selected ? 0.0 : 1.0;
+
+        animate opacity {
+            duration: 200ms;
+            easing: ease-in-out;
+        }
+
+        states [
+            selected when is-selected: {
+                fill: MiniplayerTheme.iconColorSelected;
+                commands: commands-selected;
+                in {
+                    animate fill {
+                        duration: 300ms;
+                        easing: ease-in-out;
+                    }
+                }
+                out {
+                    animate fill {
+                        duration: 300ms;
+                        easing: ease-in-out;
+                    }
+                }
+            }
+        ]
+    }
+
+    Path {
+        viewbox-width: 22;
+        viewbox-height: 22;
+        fill: MiniplayerTheme.iconColorSelected;
+        commands: commands-selected;
+        opacity: is-selected ? 1.0 : 0.0;
+        animate opacity {
+            duration: 300ms;
+            easing: ease-in-out;
+        }
+    }
+}
+
+export component LikeIcon inherits IconBase {
+    in property <string> active;
+    in property <string> icon-commands-default;
+    in property <string> icon-commands-selected;
+
+    callback clicked();
+
+    ta := TouchArea {
+        width: parent.width;
+        height: parent.height;
+        mouse-cursor: MouseCursor.pointer;
+
+        clicked => {
+            root.clicked();
+            selected-index = index;
+        }
+    }
+}
